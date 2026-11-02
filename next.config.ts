@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Für Docker: erzeugt einen minimalen `server.js` in `.next/standalone`,
+  // der ohne installierte node_modules läuft (siehe Dockerfile).
+  output: "standalone",
   // Pin the workspace root explicitly: an unrelated package-lock.json in a
   // parent directory (outside this project's own git repo) would otherwise
   // make Turbopack guess the wrong root.

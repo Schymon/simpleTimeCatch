@@ -1,0 +1,28 @@
+# Nicht in den Build-Kontext kopieren (COPY . .)
+
+# Abhängigkeiten & Build-Artefakte
+node_modules
+.next
+out
+build
+
+# Git
+.git
+.gitignore
+
+# Secrets – niemals ins Image bauen!
+.env
+.env.*
+!.env.example
+
+# Lokale Laufzeit-Daten (JSON)
+data
+
+# Sonstiges
+Dockerfile
+docker-compose.yml
+README.md
+konzept.md
+CLAUDE.md
+AGENTS.md
+*.md

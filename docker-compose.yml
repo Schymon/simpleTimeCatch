@@ -1,0 +1,28 @@
+services:
+  simple-time-catch:
+    # Lokal aus diesem Repo bauen (alternativ: vorgebautes Image referenzieren)
+    build: .
+    image: 'schymon/simple-time-catch:latest'
+    container_name: simple-time-catch
+    ports:
+      - '3000:3000'
+    volumes:
+      # Persistente JSON-Daten. Einmalig anlegen (als Host-Nutzer, uid 1000):
+      #   mkdir -p /opt/simpleTimeCatch
+      # Der Container läuft als `node` (uid 1000) und schreibt daher problemlos
+      # in einen Ordner, der dem Host-Nutzer gehört (kein chown nötig).
+      - '/opt/simpleTimeCatch:/app/data'
+    restart: unless-stopped
+    environment:
+      # Diese Variablen müssen in einer .env-Datei neben dieser Compose-Datei
+      # liegen (oder direkt gesetzt werden). Nicht im Image speichern!
+      - 'APP_PASSWORD=${APP_PASSWORD}'
+      - 'SESSION_SECRET=${SESSION_SECRET}'
+    healthcheck:
+      # Es gibt keinen eigenen /health-Endpunkt; /login ist ohne Login erreichbar
+      # und liefert 200, solange die App antwortet.
+      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:3000/login']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
