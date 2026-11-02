@@ -5,7 +5,7 @@ services:
     image: 'schymon/simple-time-catch:latest'
     container_name: simple-time-catch
     ports:
-      - '3000:3000'
+      - '3040:3000'
     volumes:
       # Persistente JSON-Daten. Einmalig anlegen (als Host-Nutzer, uid 1000):
       #   mkdir -p /opt/simpleTimeCatch
