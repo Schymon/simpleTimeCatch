@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# lokale Zeiterfassungs-Daten (siehe Konzept, Abschnitt 5) – nicht versionieren
+/data/*.json
+!/data/.gitkeep
+
 # vercel
 .vercel
 
